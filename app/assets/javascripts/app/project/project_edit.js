@@ -14,6 +14,7 @@ App.addChild('ProjectEdit', _.extend({
   el: '.project-dashboard-edit',
 
   activate: function(){
+    this.route('rewards_manage');
     this.route('basics');
     this.route('goal');
     this.route('description');

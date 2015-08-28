@@ -18,11 +18,14 @@
           = link_to (edit ? '#reports' : edit_project_path(@project, anchor: 'reports')), id: 'dashboard_reports_link', class: 'dashboard-nav-link-left ' , data: {target: '#dashboard_reports', tab_group: 'edit'} do
             span.fa.fa.fa-table.fa-lg.fa-fw
             = t('.reports_tab')
-          = link_to (edit ? '#posts' : edit_project_path(@project, anchor: 'posts')), id: 'dashboard_posts_link', class: 'dashboard-nav-link-left u-marginbottom-30' , data: {target: '#dashboard_posts', tab_group: 'edit'} do
+          = link_to (edit ? '#posts' : edit_project_path(@project, anchor: 'posts')), id: 'dashboard_posts_link', class: 'dashboard-nav-link-left' , data: {target: '#dashboard_posts', tab_group: 'edit'} do
             span.fa.fa-bullhorn.fa-fw.fa-lg
             = t('.posts_tab')
             | &nbsp
             span.badge= @project.posts.count
+          = link_to (edit ? '#rewards_manage' : edit_project_path(@project, anchor: 'rewards_manage')), id: 'dashboard_rewards_manage_link', class: 'dashboard-nav-link-left u-marginbottom-30' , data: {target: '#dashboard_rewards_manage', tab_group: 'edit'} do
+            span.fa.fa-check-square-o.fa-fw.fa-lg
+            = t('.rewards_manage')
 
       .edit-project-div
         - if @project.published?

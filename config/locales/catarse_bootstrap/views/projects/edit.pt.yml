@@ -1,6 +1,8 @@
 pt:
   projects:
     edit:
+      reward_manager_subtitle: 'Envie perguntas customizadas a seus apoiadores e garanta uma ótima experiência na entrega de recompensas'
+      reward_manager_title: 'Gerenciar questionários'
       posts: "Escrever uma novidade"
       budget: Orçamento
       budget_subtitle: "Como o seu dinheiro será utilizado? Quanto mais transparência melhor. Mostre que etapas e processos estarão envolvidos no uso desses recursos. Uma lista com os principais itens do orçamento ou até mesmo um gráfico de pizza vão super bem aqui."
@@ -117,6 +119,7 @@ pt:
       subtitle: "Você receberá nossa resposta em até 4 dias úteis no email:"
       next_steps: "Enquanto espera a sua resposta, você pode continuar editando o seu projeto! Recomendamos também que você vá coletando feedback com as pessoas próximas e planejando como será a sua campanha."
     dashboard_nav:
+      rewards_manage: "Questionários"
       leave_link_html: "&nbsp; Sair do painel de controle"
       start_tab: Minha Campanha
       reports_tab: Relatórios

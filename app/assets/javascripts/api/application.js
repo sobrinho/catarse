@@ -15,7 +15,8 @@
 
   var adminRoot = document.getElementById('new-admin'),
       teamRoot = document.getElementById('team-root'),
-      projectInsightsRoot = document.getElementById('project-insights-root');
+      projectInsightsRoot = document.getElementById('project-insights-root'),
+      projectRewardsManage = document.getElementById('project-rewards-manager-root');
 
   if(adminRoot){
     m.mount(adminRoot, c.admin.Contributions);
@@ -27,6 +28,10 @@
 
   if(projectInsightsRoot){
     m.mount(projectInsightsRoot, m.component(c.project.Insights, {root: projectInsightsRoot}));
+  }
+
+  if(projectRewardsManage){
+    m.mount(projectRewardsManage, m.component(c.project.RewardsManage, {root: projectRewardsManage}));
   }
 }(window.m, window.c, window.Chart));
 
