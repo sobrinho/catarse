@@ -18,7 +18,7 @@ class ProjectsController < ApplicationController
         return render_index_for_xhr_request if request.xhr?
         projects_for_home
       end
-      format.atom do 
+      format.atom do
         return render layout: false, locals: {projects: projects}
       end
       format.rss { redirect_to projects_path(format: :atom), :status => :moved_permanently }
@@ -102,6 +102,11 @@ class ProjectsController < ApplicationController
   end
 
   def about_mobile
+    resource
+  end
+
+  def rewards_manage
+    authorize resource, :update?
     resource
   end
 

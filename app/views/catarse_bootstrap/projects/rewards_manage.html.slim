@@ -1,0 +1,9 @@
+= render 'shared/header'
+
+.project-dashboard-edit
+  = render partial: 'dashboard_nav', locals: {edit_page: false}
+  section
+    .w-container
+      #project-rewards-manager-root data-id=@project.id
+
+= javascript_include_tag 'api/application' 

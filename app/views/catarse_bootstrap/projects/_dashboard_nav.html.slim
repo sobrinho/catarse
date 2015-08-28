@@ -1,4 +1,4 @@
-- edit = defined?(edit_page) || false
+- edit = defined?(edit_page) ? edit_page : false
 = content_for :body_class, 'body-project open'
 #project-nav
   .project-nav-wrapper
@@ -23,7 +23,7 @@
             = t('.posts_tab')
             | &nbsp
             span.badge= @project.posts.count
-          = link_to (edit ? '#rewards_manage' : edit_project_path(@project, anchor: 'rewards_manage')), id: 'dashboard_rewards_manage_link', class: 'dashboard-nav-link-left u-marginbottom-30' , data: {target: '#dashboard_rewards_manage', tab_group: 'edit'} do
+          = link_to rewards_manage_project_path(@project), class: 'dashboard-nav-link-left u-marginbottom-30' do
             span.fa.fa-check-square-o.fa-fw.fa-lg
             = t('.rewards_manage')
 

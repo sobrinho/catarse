@@ -31,7 +31,11 @@
   }
 
   if(projectRewardsManage){
-    m.mount(projectRewardsManage, m.component(c.project.RewardsManage, {root: projectRewardsManage}));
+    m.route.mode = 'hash';
+    m.route(projectRewardsManage, '/', {
+      '/': m.component(c.project.RewardsManage, {root: projectRewardsManage})
+    });
+    //m.mount(projectRewardsManage, m.component(c.project.RewardsManage, {root: projectRewardsManage}));
   }
 }(window.m, window.c, window.Chart));
 

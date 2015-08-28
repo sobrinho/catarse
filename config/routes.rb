@@ -61,6 +61,7 @@ Catarse::Application.routes.draw do
     member do
       get :reminder, to: 'projects/reminders#create'
       delete :reminder, to: 'projects/reminders#destroy'
+      get :rewards_manage, to: 'projects#rewards_manage'
       put 'pay'
       get 'embed'
       get 'video_embed'
