@@ -91,11 +91,8 @@ RSpec.describe ProjectDecorator do
     end
 
     context "when we have an online_date" do
-      let(:project){ create(:project, online_date: Time.current) }
-      before do
-        expect(I18n).to receive(:l).with(project.expires_at.in_time_zone.to_date)
-      end
-      it("should call I18n with date"){ subject }
+      let(:project){ create(:project, online_date: Time.current, online_days: 1) }
+      it{ is_expected.to eq(I18n.l((Time.current + 1.day).to_date)) }
     end
   end
 
