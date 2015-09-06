@@ -34,7 +34,8 @@
   if(projectRewardsManage){
     m.route.mode = 'hash';
     m.route(projectRewardsManage, '/', {
-      '/': m.component(c.project.RewardsManage, {root: projectRewardsManage})
+      '/': m.component(c.project.RewardsManage, {root: projectRewardsManage}),
+      '/:rewardID': m.component(c.project.RewardSurveyManage),
     });
     //m.mount(projectRewardsManage, m.component(c.project.RewardsManage, {root: projectRewardsManage}));
   }
