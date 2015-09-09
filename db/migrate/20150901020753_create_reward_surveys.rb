@@ -4,6 +4,7 @@ class CreateRewardSurveys < ActiveRecord::Migration
       t.references :reward, index: true
       t.text :options, array: true, default: []
       t.text :question, null: false
+      t.text :help_text
 
       t.timestamps
     end
