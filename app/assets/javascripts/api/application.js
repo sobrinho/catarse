@@ -20,6 +20,7 @@
       projectInsightsRoot = document.getElementById('project-insights-root'),
       projectShowRoot = document.getElementById('project-show-root'),
       flex = document.getElementById('flex');
+      projectExploreRoot = document.getElementById('project-explore-root'),
 
   if(adminRoot){
     m.route.mode = 'hash';
@@ -46,6 +47,10 @@
       project_id: projectShowRoot.getAttribute('data-id'),
       project_user_id: projectShowRoot.getAttribute('data-project-user-id')
     }));
+  }
+
+  if(projectExploreRoot){
+    m.mount(projectExploreRoot, c.contribution.ProjectsExplore);
   }
 
   if(projectInsightsRoot){
