@@ -15,6 +15,19 @@ RSpec.describe PaymentObserver do
     end
   end
 
+  describe "from_chargeback_to_paid" do
+    let(:payment) { create(:payment, state: 'chargeback') }
+
+    before do
+      create(:user, email: CatarseSettings[:email_payments])
+      payment.pay!
+    end
+
+    it "should notify backoffice when chargeback reverse" do
+      expect(ContributionNotification.where(template_name: 'chargeback_reverse', contribution: contribution).count).to eq 1
+    end
+  end
+
   describe "after_update" do
     context "when is confirmed" do
       let(:payment) do
@@ -113,9 +126,8 @@ RSpec.describe PaymentObserver do
         payment.refuse!
       end
 
-      it "should notify admin and contributor" do
+      it "should notify contributor" do
         expect(ContributionNotification.where(template_name: 'contribution_canceled', user: contribution.user, contribution: contribution).count).to eq 1
-        expect(ContributionNotification.where(template_name: 'contribution_canceled_after_confirmed', user: @admin, contribution: contribution).count).to eq 1
       end
     end
   end

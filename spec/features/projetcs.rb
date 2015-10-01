@@ -11,21 +11,9 @@ RSpec.describe "Projects", type: :feature do
   }
   before {
     CatarseSettings[:base_url] = 'http://catarse.me'
+    CatarseSettings[:api_host] = 'https://api.catarse.me'
     CatarseSettings[:company_name] = 'Catarse'
   }
-
-  describe "home" do
-    before do
-      create(:project, state: 'online', online_days: 30, online_date: Time.now)
-      create(:project, state: 'online', online_days: 30, online_date: 7.days.ago)
-      visit root_path(locale: :pt)
-    end
-
-    it "should show recent projects" do
-      recent = all(".recent-projects .card-project")
-      expect(recent.size).to eq(1)
-    end
-  end
 
   describe "explore" do
     let(:category_1) { create(:category) }

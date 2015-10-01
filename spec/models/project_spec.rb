@@ -45,7 +45,8 @@ RSpec.describe Project, type: :model do
     context "when project is not published" do
       let(:project) { create(:project, state: 'draft') }
 
-      it "should be validate size of name" do
+      it "should be validate size of name when project is in analysis" do
+        project.state = 'in_analysis'
         project.name = 'l'*100
         expect(project.valid?).to eq(false)
 
@@ -175,21 +176,6 @@ RSpec.describe Project, type: :model do
     subject { Project.state_names }
 
     it { is_expected.to match_array(states) }
-  end
-
-  describe '.near_of' do
-    before do
-      mg_user = create(:user, address_state: 'MG')
-      sp_user = create(:user, address_state: 'SP')
-      3.times { create(:project, user: mg_user) }
-      6.times { create(:project, user: sp_user) }
-    end
-
-    let(:state) { 'MG' }
-
-    subject { Project.near_of(state) }
-
-    it { is_expected.to have(3).itens }
   end
 
   describe ".by_permalink" do

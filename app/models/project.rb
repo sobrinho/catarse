@@ -78,7 +78,6 @@ class Project < ActiveRecord::Base
   scope :in_funding, -> { not_expired.with_states(['online']) }
   scope :name_contains, ->(term) { where("unaccent(upper(name)) LIKE ('%'||unaccent(upper(?))||'%')", term) }
   scope :user_name_contains, ->(term) { joins(:user).where("unaccent(upper(users.name)) LIKE ('%'||unaccent(upper(?))||'%')", term) }
-  scope :near_of, ->(address_state) { where("EXISTS(SELECT true FROM users u WHERE u.id = projects.user_id AND lower(u.address_state) = lower(?))", address_state) }
   scope :to_finish, ->{ expired.with_states(['online', 'waiting_funds']) }
   scope :visible, -> { without_states(['draft', 'rejected', 'deleted', 'in_analysis', 'approved']) }
   scope :financial, -> { with_states(['online', 'successful', 'waiting_funds']).where(expires_at: 15.days.ago.. Time.current) }
@@ -123,7 +122,6 @@ class Project < ActiveRecord::Base
   validates_numericality_of :goal, greater_than: 9, allow_blank: true
   validates_uniqueness_of :permalink, case_sensitive: false
   validates_format_of :permalink, with: /\A(\w|-)*\Z/
-  validates_length_of :name, maximum: NAME_MAXLENGTH, unless: :published?
 
 
   [:between_created_at, :between_expires_at, :between_online_date, :between_updated_at].each do |name|

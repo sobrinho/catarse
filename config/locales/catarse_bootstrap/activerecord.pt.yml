@@ -31,6 +31,7 @@ pt:
         account_digit: 'Dígito conta'
         account_type: 'Tipo de conta'
       bank_account:
+        account_type: 'Tipo de conta'
         input_bank_number: "Número do banco"
         bank: 'Banco'
         bank_id: 'Banco'
@@ -207,6 +208,7 @@ pt:
             uploaded_image:
               blank: 'A imagem do projeto não pode ficar em branco'
             name:
+              too_long: "Nome do projeto é muito longo (máximo: 50 caracteres)"
               blank: "O nome do projeto não pode ficar em branco"
             permalink:
               blank: "A URL do projeto não pode ficar em branco"

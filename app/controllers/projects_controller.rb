@@ -4,7 +4,7 @@ class ProjectsController < ApplicationController
   after_filter :redirect_user_back_after_login, only: %i[index show]
   before_action :authorize_and_build_resources, only: %i[edit show]
 
-  has_scope :pg_search, :by_category_id, :near_of
+  has_scope :pg_search, :by_category_id
   has_scope :recent, :expiring, :successful, :in_funding, :recommended, :not_expired, type: :boolean
 
   helper_method :project_comments_canonical_url, :resource, :collection
@@ -12,11 +12,12 @@ class ProjectsController < ApplicationController
   respond_to :html
   respond_to :json, only: [:index, :show, :update]
 
+  before_action :referral_it!
+
   def index
     respond_to do |format|
       format.html do
         return render_index_for_xhr_request if request.xhr?
-        projects_for_home
       end
       format.atom do
         return render layout: false, locals: {projects: projects}
@@ -160,13 +161,6 @@ class ProjectsController < ApplicationController
       most_recent_first.
       includes(:project_total, :user, :category).
       page(page).per(18)
-  end
-
-  def projects_for_home
-    @recommends = ProjectsForHome.recommends.includes(:project_total, :user)
-    @projects_near = Project.with_state('online').near_of(current_user.address_state).order("random()").limit(3).includes(:project_total, :user) if current_user
-    @expiring = ProjectsForHome.expiring.includes(:project_total, :user)
-    @recent   = ProjectsForHome.recents.includes(:project_total, :user)
   end
 
   def should_use_validate
