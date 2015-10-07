@@ -16,9 +16,10 @@
 
   var adminRoot = document.getElementById('new-admin'),
       teamRoot = document.getElementById('team-root'),
-      projectInsightsRoot = document.getElementById('project-insights-root'),
       projectRewardsManage = document.getElementById('project-rewards-manager-root'),
-      projectIndexRoot = document.getElementById('project-index-root');
+      projectIndexRoot = document.getElementById('project-index-root'),
+      projectInsightsRoot = document.getElementById('project-insights-root'),
+      projectShowRoot = document.getElementById('project-show-root');
 
   if(adminRoot){
     m.mount(adminRoot, c.admin.Contributions);
@@ -30,6 +31,13 @@
 
   if(projectIndexRoot){
     m.mount(projectIndexRoot, c.contribution.ProjectsHome);
+  }
+
+  if(projectShowRoot) {
+    m.mount(projectShowRoot, m.component(c.project.Show, {
+      project_id: projectShowRoot.getAttribute('data-id'),
+      project_user_id: projectShowRoot.getAttribute('data-project-user-id')
+    }));
   }
 
   if(projectInsightsRoot){

@@ -38,34 +38,32 @@ Catarse::Application.routes.draw do
     end
   end
   resources :auto_complete_projects, only: [:index]
+  resources :donations, only: [:create]
   resources :auto_complete_cities, only: [:index]
   resources :projects, only: [ :index, :create, :update, :edit, :new, :show] do
     resources :accounts, only: [:create, :update]
-    resources :posts, controller: 'projects/posts', only: [ :index, :destroy ]
-    resources :rewards, only: [ :index ] do
+    resources :posts, controller: 'projects/posts', only: [ :destroy ]
+    resources :rewards do
       post :sort, on: :member
     end
     resources :contributions, {except: [:index], controller: 'projects/contributions'} do
       collection do
-        get :details, to: 'projects/contribution_details#index'
         get :fallback_create, to: 'projects/contributions#create'
       end
       member do
         get 'toggle_anonymous'
         get :second_slip
+        get :no_account_refund
       end
       put :credits_checkout, on: :member
     end
 
     get 'video', on: :collection
     member do
-      get :reminder, to: 'projects/reminders#create'
-      delete :reminder, to: 'projects/reminders#destroy'
       get :rewards_manage, to: 'projects#rewards_manage'
       put 'pay'
       get 'embed'
       get 'video_embed'
-      get 'about_mobile'
       get 'embed_panel'
       get 'send_to_analysis'
       get 'publish'

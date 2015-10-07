@@ -24,7 +24,7 @@ RSpec.describe Project, type: :model do
     it{ is_expected.to validate_numericality_of(:goal) }
     it{ is_expected.to allow_value(10).for(:goal) }
     it{ is_expected.not_to allow_value(8).for(:goal) }
-    it{ is_expected.to ensure_length_of(:headline).is_at_most(Project::HEADLINE_MAXLENGTH) }
+    it{ is_expected.to validate_length_of(:headline).is_at_most(Project::HEADLINE_MAXLENGTH) }
     it{ is_expected.to allow_value('http://vimeo.com/12111').for(:video_url) }
     it{ is_expected.to allow_value('vimeo.com/12111').for(:video_url) }
     it{ is_expected.to allow_value('https://vimeo.com/12111').for(:video_url) }
@@ -100,28 +100,6 @@ RSpec.describe Project, type: :model do
       let!(:project) { create(:project, state: 'draft') }
       it { is_expected.to eq(false) }
     end
-  end
-
-  describe "#user_already_in_reminder?" do
-    let(:user) { create(:user) }
-    subject { project.user_already_in_reminder?(user.id) }
-    before do
-      project.notify_once(:reminder, user, project)
-    end
-
-    it { is_expected.to eq(true)}
-  end
-
-  describe "#total_reminders" do
-    let(:user) { create(:user) }
-    before do
-      project.notify_once(:reminder, user, project)
-      project.notify_once(:reminder, project.user, project)
-    end
-
-    subject { project.total_reminders }
-
-    it { is_expected.to eq(2) }
   end
 
   describe ".of_current_week" do
