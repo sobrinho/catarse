@@ -1,14 +1,6 @@
 class AddRewardSurveyDetailsView < ActiveRecord::Migration
   def up
     execute <<-SQL
-      drop function if exists public.is_owner_or_admin(integer);
-      CREATE FUNCTION public.is_owner_or_admin(user_id integer) RETURNS boolean
-        LANGUAGE sql STABLE
-        AS $_$
-            SELECT
-              (current_user = 'admin' OR current_setting('user_vars.user_id') = $1::text);
-          $_$;
-
       create view "1".reward_survey_details as
       	select
       		rs.id as id,
@@ -29,13 +21,6 @@ class AddRewardSurveyDetailsView < ActiveRecord::Migration
   def down
     execute <<-SQL
       drop view if exists "1".reward_survey_details;
-      drop function if exists public.is_owner_or_admin(integer);
-      CREATE FUNCTION public.is_owner_or_admin(user_id integer) RETURNS boolean
-        LANGUAGE sql STABLE SECURITY DEFINER
-        AS $_$
-            SELECT
-              (current_user = 'admin' OR current_setting('user_vars.user_id') = $1::text);
-          $_$;
     SQL
   end
 end
