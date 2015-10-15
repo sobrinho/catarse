@@ -61,6 +61,7 @@ Catarse::Application.routes.draw do
     get 'video', on: :collection
     member do
       get :rewards_manage, to: 'projects#rewards_manage'
+      get 'insights'
       put 'pay'
       get 'embed'
       get 'video_embed'
