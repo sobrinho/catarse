@@ -86,6 +86,10 @@ gem 'video_info', '>= 1.1.1'
 gem 'httparty', '~> 0.6.1' # this version is required by moip gem, otherwise payment confirmation will break
 gem 'typhoeus'
 
+# We use rack-timeout per heroku recommendation (using in development as well to catch slow requests):
+# https://devcenter.heroku.com/articles/deploying-rails-applications-with-the-puma-web-server#timeout
+gem "rack-timeout"
+
 # Translations
 gem 'http_accept_language'
 gem 'routing-filter', '~> 0.4.0.pre'
@@ -100,6 +104,7 @@ group :production do
 
   # Workers, forks and all that jazz
   gem 'unicorn'
+  gem 'puma'
 
   # Enabling Gzip on Heroku
   # If you don't use Heroku, please comment the line below.
